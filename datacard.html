@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #dataCard {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            padding: 50px;
+            height: 100vh;
+            width: 100vh;
+            z-index: 999;
+        }
+
+        #dataCard h2 {
+            color: blue;
+            top: 10px;
+            left: 21px;
+            padding: 10px;
+            align-items: baseline;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        #dataCard label {
+            color: rgb(19, 19, 20);
+            padding: 2px;
+        }
+
+        #dataCard input,
+        #dataCard select {
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 200px;
+        }
+
+        #dataCard button {
+            padding: 10px;
+            background-color: rgb(0, 255, 17);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #output {
+            display: none; 
+            height: 20vh;
+            width: 25vw;
+            background-color: white;
+            z-index: 99;
+            background-size: 40px 40px;
+            padding: 20px; 
+            border-radius: 10px; 
+            margin-top: 20px;
+        }
+
+        #output h3 {
+            color: blue;
+        }
+
+        #output p {
+            margin-bottom: 10px;
+        }
+
+        #output strong {
+            margin-left: 2px;
+            color: rgba(11, 11, 12, 0.908);
+        }
+
+        #loader {
+            display: none;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid rgb(0, 255, 17);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -10px;
+            margin-left: -10px;
+            z-index: 1000;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div id="dataCard">
+    <h2>Student Details</h2>
+
+    <label for="studentName">Student Name:</label>
+    <input type="text" id="studentName" placeholder="Enter name" required><br><br>
+
+    <label for="AdmissionNo">Admission No:</label>
+    <input type="text" id="AdmissionNo" placeholder="Enter AdmissionNo" required><br><br>
+
+    <label for="Enrollment no">Enrollment no:</label>
+    <input type="text" id="Enrollmentno" class="kk" placeholder="Enter Enrollment no" required><br><br>
+
+    <label for="Programname">Program name:</label>
+    <select name="Programname" id="Programname">
+        <option value="--select Program name--">--select Program name--</option>
+        <option value="M.tech">M.tech</option>
+        <option value="Mca">Mca</option>
+        <option value="b.tech">B.tech</option>
+    </select><br><br>
+
+    <label for="DOB">DOB:</label>
+    <input type="date" id="DOB" class="kk" placeholder="Enter DOB" required pattern="dd/mm/yyyy"><br><br>
+
+    <label for="Batch">Batch:</label>
+    <input type="text" id="Batch" class="kk" placeholder="Enter Batch" required><br><br>
+
+    <button onclick="Submit()">Submit</button>
+    <div id="output"></div>
+
+    
+    <div id="loader" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</div>
+
+<script>
+    function Submit() {
+        
+        var loader = document.getElementById("loader");
+        loader.style.display = "block";
+
+        var studentName = document.getElementById("studentName").value;
+        var AdmissionNo  = document.getElementById("AdmissionNo").value;
+        var EnrollmentNo  = document.getElementById("Enrollmentno").value;
+        var Programname = document.getElementById("Programname").value;
+        var DOB = document.getElementById("DOB").value;
+        var Batch = document.getElementById("Batch").value;
+
+        
+        setTimeout(function () {
+            var output = document.getElementById("output");
+            output.style.display = "block"; 
+            output.innerHTML = `
+                <h3>Student:</h3>
+                <p><strong>Name:</strong> ${studentName} </p>
+                <p><strong>Admission No:</strong> ${AdmissionNo} </p>
+                <p><strong>Enrollment No:</strong> ${EnrollmentNo} </p>
+                <p><strong>Program name:</strong> ${Programname} </p>
+                <p><strong>DOB:</strong> ${DOB}</p>
+                <p><strong>Batch:</strong> ${Batch}</p>
+            `;
+
+            
+            loader.style.display = "none";
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>
